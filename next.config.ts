@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 // Default to direct image delivery to avoid production 402 errors from /_next/image.
 // Set NEXT_DISABLE_IMAGE_OPTIMIZATION=false at build time to re-enable Next optimization.
 const disableImageOptimization =
-  process.env.NEXT_DISABLE_IMAGE_OPTIMIZATION !== "false";
+  process.env.NEXT_DISABLE_IMAGE_OPTIMIZATION !== "true";
 
 const nextConfig: NextConfig = {
   images: {
