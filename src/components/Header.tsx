@@ -34,7 +34,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1">
               <Phone className="size-3" />
-              +8801313542742
+              +8801931117525
             </span>
             <span>৳ Cash on Delivery Available</span>
           </div>
@@ -132,11 +132,11 @@ export function Header() {
                         Track Order
                       </Link>
                       <a
-                        href="tel:+8801313542742"
+                        href="tel:+8801931117525"
                         className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-[#E5E5E5]/80 hover:text-white"
                       >
                         <Phone className="size-4" />
-                        +8801313542742
+                        +8801931117525
                       </a>
                     </div>
                   </div>
