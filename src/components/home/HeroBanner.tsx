@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { HeroSection } from "@/components/home/HeroSection";
+import SpatialProductShowcase from "@/components/ui/spatial-product-showcase";
 import { BannerSlider } from "@/components/home/BannerSlider";
 import type { Banner, BannerSettings } from "@/types";
 
@@ -35,9 +35,9 @@ export async function HeroBanner() {
   const { banners, settings } = await fetchActiveBanners();
   const transitionSeconds = settings?.transition_seconds ?? 5;
 
-  // No active banners → show existing fallback hero
+  // No active banners → show AirPod Pro spatial showcase hero
   if (banners.length === 0) {
-    return <HeroSection />;
+    return <SpatialProductShowcase />;
   }
 
   // Single banner → show image, no slider UI

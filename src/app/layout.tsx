@@ -4,7 +4,7 @@ import { Toaster } from "sonner";
 import { TrackingScripts } from "@/components/TrackingScripts";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { buildCustomThemeCss, getThemeSettings } from "@/lib/theme";
+import { getThemeSettings } from "@/lib/theme";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -68,7 +68,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const theme = await getThemeSettings();
-  const customCss = theme.active === "custom" ? buildCustomThemeCss(theme) : null;
 
   return (
     <html
@@ -85,9 +84,6 @@ export default async function RootLayout({
           type="font/ttf"
           crossOrigin="anonymous"
         />
-        {customCss && (
-          <style dangerouslySetInnerHTML={{ __html: customCss }} />
-        )}
       </head>
       <body
         className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased font-sans`}

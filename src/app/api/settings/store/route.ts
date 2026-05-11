@@ -6,11 +6,6 @@ import { createAdminClient } from "@/lib/supabase/admin";
 const PUBLIC_KEYS = [
   // Theme & appearance
   "theme_active",
-  "theme_custom_primary",
-  "theme_custom_background",
-  "theme_custom_foreground",
-  "theme_custom_secondary",
-  "theme_custom_accent",
   "customization_enabled",
   "customization_price",
   "customization_option_paid_enabled",
