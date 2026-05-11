@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Waves, Cpu, BatteryFull } from "lucide-react";
 import { createAdminClient } from "@/lib/supabase/admin";
 import SpatialProductShowcase from "@/components/ui/spatial-product-showcase";
 import { BannerSlider } from "@/components/home/BannerSlider";
@@ -37,7 +38,23 @@ export async function HeroBanner() {
 
   // No active banners → show AirPod Pro spatial showcase hero
   if (banners.length === 0) {
-    return <SpatialProductShowcase />;
+    return (
+      <SpatialProductShowcase
+        image="/airpod_pro.png"
+        eyebrow="Audio · New"
+        title="Airpod Pro 2nd Gen"
+        tagline="Evolve the way you listen."
+        description="Adaptive Audio tunes itself to every moment. 2× the active noise cancellation. All powered by the H2 chip — handpicked by Evolution Gadget."
+        href="/category/airpods"
+        ctaLabel="Shop AirPods"
+        priority
+        features={[
+          { label: "Adaptive ANC", icon: Waves },
+          { label: "H2 Chip", icon: Cpu },
+          { label: "30h Battery", icon: BatteryFull },
+        ]}
+      />
+    );
   }
 
   // Single banner → show image, no slider UI
