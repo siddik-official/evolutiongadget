@@ -1,6 +1,6 @@
 import { createPublicServerClient } from "./supabase/public-server";
 
-export type ThemeName = "neon-green" | "cyan-blue";
+export type ThemeName = "royal-blue" | "cyan-blue";
 
 export interface ThemeSettings {
   active: ThemeName;
@@ -9,25 +9,46 @@ export interface ThemeSettings {
 export const THEME_KEYS = ["theme_active"] as const;
 
 export const DEFAULT_THEME: ThemeSettings = {
-  active: "neon-green",
+  active: "royal-blue",
 };
 
 export const THEME_PRESETS = {
-  "neon-green": {
-    label: "Neon Green",
-    description: "Black + neon green — sporty & aggressive",
-    primary: "#39FF14",
-    background: "#0B0B0B",
-    secondary: "#1F1F1F",
+  "royal-blue": {
+    label: "Royal Blue",
+    description: "Slate + royal blue — modern, calm, premium tech feel",
+    primary: "#2F6FED",
+    primaryHover: "#1F5AD1",
+    background: "#0F1115",
+    surface: "#161A22",
+    surface2: "#1D2330",
+    border: "#2A3140",
+    text: "#F5F7FA",
+    mutedText: "#9AA4B2",
+    accentAlt: "#14B8A6",
+    success: "#22C55E",
   },
   "cyan-blue": {
     label: "Electric Cyan",
     description: "Light + electric cyan — modern & premium",
     primary: "#00E5FF",
+    primaryHover: "#00B4D8",
     background: "#F4F7FB",
-    secondary: "#0A1F44",
+    surface: "#FFFFFF",
+    surface2: "#E2E8F0",
+    border: "#CBD5E1",
+    text: "#0A1F44",
+    mutedText: "#475569",
+    accentAlt: "#22D3EE",
+    success: "#22C55E",
   },
 } as const;
+
+// Legacy theme key from earlier builds. Map to the new royal-blue palette.
+function normalizeThemeName(raw: unknown): ThemeName {
+  if (raw === "royal-blue" || raw === "cyan-blue") return raw;
+  if (raw === "neon-green") return "royal-blue";
+  return DEFAULT_THEME.active;
+}
 
 export async function getThemeSettings(): Promise<ThemeSettings> {
   try {
@@ -37,13 +58,7 @@ export async function getThemeSettings(): Promise<ThemeSettings> {
       .select("key, value")
       .eq("key", "theme_active");
 
-    const rawActive = data?.[0]?.value as ThemeName | undefined;
-    const active: ThemeName =
-      rawActive === "neon-green" || rawActive === "cyan-blue"
-        ? rawActive
-        : DEFAULT_THEME.active;
-
-    return { active };
+    return { active: normalizeThemeName(data?.[0]?.value) };
   } catch {
     return DEFAULT_THEME;
   }

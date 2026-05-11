@@ -32,11 +32,14 @@ export default function AdminThemeSettingsPage() {
         if (!res.ok) return;
         const data: Record<string, string> = await res.json();
         if (!active) return;
-        const raw = data.theme_active as ThemeName | undefined;
+        const raw = data.theme_active;
+        // Legacy: map "neon-green" → "royal-blue"
         const next: ThemeName =
-          raw === "neon-green" || raw === "cyan-blue"
+          raw === "royal-blue" || raw === "cyan-blue"
             ? raw
-            : DEFAULT_THEME.active;
+            : raw === "neon-green"
+              ? "royal-blue"
+              : DEFAULT_THEME.active;
         setTheme({ active: next });
       } finally {
         if (active) setLoading(false);
@@ -131,7 +134,7 @@ export default function AdminThemeSettingsPage() {
                         />
                         <span
                           className="absolute bottom-2 left-2 size-6 rounded-full shadow-md"
-                          style={{ backgroundColor: preset.secondary }}
+                          style={{ backgroundColor: preset.accentAlt }}
                         />
                       </div>
                       <p className="font-semibold text-sm">{preset.label}</p>
